@@ -8,22 +8,7 @@
     },
     "newArchEnabled": true,
     "plugins": [
-      "expo-font",
-      [
-        "expo-build-properties",
-        {
-          "ios": {
-            "deploymentTarget": "15.0"
-          }
-        }
-      ],
-      [
-        "react-native-device-activity",
-        {
-          "appleTeamId": "<YOUR_TEAM_ID>",
-          "appGroup": "group.<YOUR_APP_GROUP_NAME>"
-        }
-      ]
+      "expo-font"
     ]
   }
 }
