@@ -1,95 +1,99 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Animated, View, Text, StyleSheet, ImageBackground } from 'react-native';
 import { useRouter } from 'expo-router';
 import PrimaryButton from '../components/PrimaryButton';
 import CustomProgressBar from '../components/CustomProgressBar';
 import VerticalSlider from '../components/VerticalSlider';
+import globalStyles from './styles/globalStyles';
 
 export default function PhonePickupsEstimation() {
   const router = useRouter();
   const [pickupCount, setPickupCount] = useState(10);
+  const [fadeAnim] = useState(new Animated.Value(0));
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 200,
+      useNativeDriver: true,
+    }).start();
+  }, []);
 
   const handlePress = () => {
-    router.replace("/setgoals");
+    router.replace("/uncoverscreentime");
   };
 
   return (
     <ImageBackground
       source={require('../assets/images/background.png')}
-      style={styles.background}
+      style={globalStyles.background}
       resizeMode="cover"
     >
       <View style={styles.container}>
-        <View style={styles.header}>
-          <CustomProgressBar progress={0.66} />
-          <Text style={styles.headerTitle}>
+        <CustomProgressBar progress={0.4} />
+
+        <Animated.View style={[styles.content, { opacity: fadeAnim }]}>
+          <Text style={globalStyles.title}>
             How often do you pick up your phone during the day?
           </Text>
-        </View>
+        </Animated.View>
 
-        <View style={styles.sliderWrapper}>
-          <VerticalSlider 
+        <View style={styles.sliderContainer}>
+          <VerticalSlider
             min={0}
             max={500}
             initialValue={pickupCount}
             onValueChange={(val) => setPickupCount(val)}
-            sliderHeight={180}
           />
         </View>
 
-        <View style={styles.footer}>
-          <PrimaryButton 
+        <Animated.View style={[styles.bottomContainer, { opacity: fadeAnim }]}>
+          <PrimaryButton
             title="Continue"
             onPress={handlePress}
             containerStyle={{ position: 'relative', width: '90%', marginBottom: 10 }}
           />
-        </View>
+        </Animated.View>
       </View>
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-  },
   container: {
     flex: 1,
     position: 'relative',
+    justifyContent: 'flex-start',
     width: '100%',
     height: '100%',
   },
-  header: {
+  content: {
     position: 'absolute',
-    top: '5%',
-    left: 0,
-    right: 0,
+    top: '18%',
+    left: '2%',
+    right: '2%',
+    flex: 1,
     alignItems: 'center',
-    zIndex: 10,
+    justifyContent: 'center',
+    paddingHorizontal: 30,
   },
-  headerTitle: {
-    color: '#922661',
-    fontSize: 22,
-    fontWeight: 'bold',
-    textAlign: 'center',
+  sliderContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '50%',
+    marginTop: '25%',
+  },
+  sliderValueText: {
     marginTop: 10,
-    fontFamily: 'PlayfairDisplay',
-    marginHorizontal: '5%',
+    fontSize: 18,
+    color: '#922661',
+    fontWeight: 'bold',
   },
-  sliderWrapper: {
+  bottomContainer: {
     position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: [{ translateX: -30 }, { translateY: -90 }],
-    zIndex: 10,
-  },
-  footer: {
-    position: 'absolute',
-    bottom: '5%',
-    left: 0,
-    right: 0,
+    bottom: '11.8%',
+    left: '5%',
+    right: '5%',
     alignItems: 'center',
     zIndex: 10,
   },
