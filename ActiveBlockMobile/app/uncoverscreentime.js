@@ -12,7 +12,7 @@ import CustomProgressBar from '../components/CustomProgressBar';
 import PrimaryButton from '../components/PrimaryButton';
 import globalStyles from './styles/globalStyles';
 
-export default function OnboardingScreen() {
+export default function UncoverScreentime() {
   const [fadeAnim] = useState(new Animated.Value(0));
   const router = useRouter();
 
@@ -30,25 +30,22 @@ export default function OnboardingScreen() {
 
   return (
     <ImageBackground
-      source={require('../assets/images/background2.png')}
+      source={require('../assets/images/background3.png')}
       style={globalStyles.background}
       resizeMode="cover"
     >
       <View style={styles.container}>
-        <CustomProgressBar progress={0.2} />
+        <CustomProgressBar progress={0.6} />
         <Animated.View style={[styles.content, { opacity: fadeAnim }]}>
           <Text style={globalStyles.title}>
-            Let's make this all about <Text style={{ fontStyle: 'italic' }}>you</Text>! 💖 {'\n'} We're customizing AppBlock to fit your vibe.✨
+            Now, let's uncover your screen time. 
           </Text>
           <Text style={globalStyles.subtitle}>
-            Just a few quick questions before we start! Your answers will help us personalize your experience, so everything feels just right for you.
+          Grant ActiveBlock access to Screen Time and we'll generate your personal report.
           </Text>
         </Animated.View>
         <Animated.View style={[styles.bottomContainer, { opacity: fadeAnim }]}>
-          <PrimaryButton title="Continue" onPress={handlePress} containerStyle={{ position: 'relative', left: 0, right: 0 }} />
-          <Text style={[styles.dataPolicyText, { marginTop: 10 }]}>
-            Data Policy
-          </Text>
+          <PrimaryButton title="Grant Permission" onPress={handlePress} containerStyle={{ position: 'relative', left: 0, right: 0 }} />
         </Animated.View>
       </View>
     </ImageBackground>
@@ -73,15 +70,10 @@ const styles = StyleSheet.create({
   },
   bottomContainer: {
     position: 'absolute',
-    bottom: '11.8%',
+    bottom: '12%',
     left: '5%',
     right: '5%',
     alignItems: 'center',
     zIndex: 10,
-  },
-  dataPolicyText: {
-    color: '#b24c9b',
-    fontSize: 12,
-    textAlign: 'center',
   },
 });
