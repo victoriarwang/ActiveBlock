@@ -1,0 +1,17 @@
+# .gitignore
+
+# Python virtual environment
+.venv/
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Node modules
+frontend/node_modules/
+
+# Build files
+frontend/build/
+
+# Others
+.DS_Store

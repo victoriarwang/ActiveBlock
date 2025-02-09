@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "ActiveBlockMobile",
+    "slug": "ActiveBlockMobile",
+    "scheme": "activeblock",
+    "splash": {
+      "backgroundColor": "#000000"
+    },
+    "newArchEnabled": true,
+    "plugins": [
+      "expo-font"
+    ]
+  }
+}
